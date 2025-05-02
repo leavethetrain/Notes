@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Notizen</title>
     <link rel="stylesheet" href="styles.css" />
-    <script defer src="main.js"></script>
   </head>
   <body>
     <div class="note-wrapper">
       <!--==================sidebar==================================-->
 
       <div class="sidebar">
-        <button id="add-note-id" class="add-note">
+        <button onclick="createNote()" id="add-note-id" class="add-note">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -29,32 +28,7 @@
           </svg>
           <span>Neue Notiz erstellen</span>
         </button>
-        <div class="note-list">
-          <div id="saved-notes-id" class="saved-notes selected">
-            <h2 class="title-saved-notes">Title</h2>
-            <p class="content-saved-notes">
-              content saved
-              notesdhiehfefiefifhfeihfoeeougogefogeofgoegfogegfoegfogeofgegfouegfuogeofg
-            </p>
-            <span class="date"><em>22.02.2025</em></span>
-          </div>
-          <div id="saved-notes-id" class="saved-notes">
-            <h2 class="title-saved-notes">Title</h2>
-            <p class="content-saved-notes">
-              content saved
-              notesdhiehfefiefifhfeihfoeeougogefogeofgoegfogegfoegfogeofgegfouegfuogeofg
-            </p>
-            <span class="date"><em>22.02.2025</em></span>
-          </div>
-          <div id="saved-notes-id" class="saved-notes">
-            <h2 class="title-saved-notes">Title</h2>
-            <p class="content-saved-notes">
-              content saved
-              notesdhiehfefiefifhfeihfoeeougogefogeofgoegfogegfoegfogeofgegfouegfuogeofg
-            </p>
-            <span class="date"><em>22.02.2025</em></span>
-          </div>
-        </div>
+        <div id="notes-list-id" class="note-list"></div>
       </div>
 
       <!--===============maincontent===================-->
@@ -109,5 +83,7 @@
         </div>
       </div>
     </div>
+    <script src="notesAPI.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>
