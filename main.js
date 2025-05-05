@@ -5,15 +5,28 @@ const noteInputEl = document.getElementById("note-content-id");
 
 saveButtonEl.addEventListener("click", clickSaveButton);
 
+createNote();
+applyListeners();
+
+function applyListeners() {
+  const noteEntryEl = document.querySelectorAll(".saved-notes");
+
+  noteEntryEl.forEach((noteEntry) => {
+    noteEntry.addEventListener("click", () =>
+      selectNote(noteEntry.getAttribute("data-id"))
+    );
+  });
+}
+
 function createNote() {
   const notes = getNotes();
   const sortedNotes = notes.sort((a, b) => b.date - a.date);
-  let html = "";
+  let sidebar = "";
 
   sortedNotes.forEach((note) => {
-    html += `
+    sidebar += `
     
-          <div data-id="${note.id}" class="saved-notes selected">
+          <div data-id="${note.id}" class="saved-notes">
             <h2 class="title-saved-notes">${note.title}</h2>
             <p class="content-saved-notes">
               ${note.content}
@@ -26,36 +39,7 @@ function createNote() {
     `;
   });
 
-  notesListEL.innerHTML = html;
-
-  /*const wrapper = document.createElement("div");
-  wrapper.id = "saved-notes-id";
-  wrapper.classList.add("saved-notes");
-
-  const titleNote = document.createElement("h2");
-  titleNote.classList.add("title-saved-notes");
-
-  const contentNote = document.createElement("p");
-  contentNote.classList.add("content-saved-notes");
-
-  const dateNote = document.createElement("span");
-  dateNote.classList.add("date");
-
-  const titleNoteText = document.createTextNode(currentNote.title);
-  const contentNoteText = document.createTextNode(currentNote.content);
-  const dateNoteText = document.createTextNode(currentNote.date);
-
-  titleNote.appendChild(titleNoteText);
-  contentNote.appendChild(contentNoteText);
-  dateNote.appendChild(dateNoteText);
-
-  wrapper.appendChild(titleNote);
-  wrapper.appendChild(contentNote);
-  wrapper.appendChild(dateNote);
-
-  document.getElementById("notes-list-id").prepend(wrapper);
-
- */
+  notesListEL.innerHTML = sidebar;
 }
 
 function clickSaveButton() {
@@ -66,9 +50,63 @@ function clickSaveButton() {
     alert("bitte Überschrift und Notiz eingeben");
     return;
   }
+  const notes = getNotes();
+  const selectedNoteId = localStorage.getItem(SELECTED_ID);
 
-  saveNote(title, content);
+  if (selectedNoteId) {
+    const updatedNotes = notes.map((note) => {
+      if (note.id === parseInt(selectedNoteId)) {
+        return {
+          ...note,
+          title,
+          content,
+          date: new Date().getTime(),
+        };
+      }
+      return note;
+    });
+
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedNotes));
+    localStorage.removeItem(SELECTED_ID);
+  } else {
+    notes.push({
+      id: getNextId(),
+      title,
+      content,
+      date: new Date().getTime(),
+    });
+    localStorage.setItem("noteapp-notes", JSON.stringify(notes));
+  }
+
+  titleInputEl.value = "";
+  noteInputEl.value = "";
+
   createNote();
+  applyListeners();
 }
 
-createNote();
+function selectNote(id) {
+  const notes = getNotes();
+  const currentNote = notes.find((note) => note.id === parseInt(id));
+
+  if (!currentNote) {
+    return;
+  }
+
+  titleInputEl.value = currentNote.title;
+  noteInputEl.value = currentNote.content;
+
+  localStorage.setItem(SELECTED_ID, currentNote.id);
+
+  const selectedNoteEl = document.querySelector(
+    `.saved-notes[data-id="${id}"]`
+  );
+  if (selectedNoteEl.classList.contains("selected")) return;
+
+  const noteEntriesEls = document.querySelectorAll(".saved-notes");
+  noteEntriesEls.forEach((noteEntry) => {
+    noteEntry.classList.remove("selected");
+  });
+
+  selectedNoteEl.classList.add("selected");
+}
