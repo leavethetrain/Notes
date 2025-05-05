@@ -2,8 +2,12 @@ const notesListEL = document.querySelector(".note-list");
 const saveButtonEl = document.querySelector(".save");
 const titleInputEl = document.getElementById("title-input-id");
 const noteInputEl = document.getElementById("note-content-id");
+const addButtonEl = document.getElementById("add-note-id");
+const deleteButtonEl = document.getElementById("delete-button");
 
 saveButtonEl.addEventListener("click", clickSaveButton);
+addButtonEl.addEventListener("click", newNote);
+deleteButtonEl.addEventListener("click", deleteNote);
 
 createNote();
 applyListeners();
@@ -110,3 +114,12 @@ function selectNote(id) {
 
   selectedNoteEl.classList.add("selected");
 }
+
+function newNote() {
+  titleInputEl.value = "";
+  noteInputEl.value = "";
+
+  localStorage.removeItem(SELECTED_ID);
+}
+
+function deleteNote() {}
