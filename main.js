@@ -122,4 +122,12 @@ function newNote() {
   localStorage.removeItem(SELECTED_ID);
 }
 
-function deleteNote() {}
+function deleteNote() {
+  //const notes = getNotes();
+  const currentNote = localStorage.getItem(SELECTED_ID);
+
+  if (currentNote) {
+    alert("Willst du die Notiz wirklich löschen?");
+    localStorage.removeItem(SELECTED_ID);
+  }
+}
