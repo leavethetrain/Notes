@@ -4,34 +4,26 @@ const SELECTED_ID = "selectedNoteId";
 function saveNote(title, content, id = undefined) {
   const notes = getNotes();
 
-  if (id) {
-    const updateNotes = notes.map((note) => {
-      if (note.id === parseInt(id)) {
-        return {
-          ...note,
-          title,
-          content,
-          date: new Date().getTime(),
-        };
-      }
-
-      return note;
-    });
-
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updateNotes));
-  } else {
-    const getNextNote = getNextId(notes);
-
-    const newNote = {
+  if (!id) {
+    notes.push({
       title,
       content,
-      id: getNextNote,
+      id: getNextId(),
       date: new Date().getTime(),
-    };
+    });
+  } else {
+    const indexOfNoteId = notes.findIndex((note) => note.id === id);
 
-    notes.push(newNote);
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(notes));
+    if (indexOfNoteId > -1) {
+      notes[indexOfNoteId] = {
+        title,
+        content,
+        id,
+        date: new Date().getTime(),
+      };
+    }
   }
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(notes));
 }
 
 function getNotes() {

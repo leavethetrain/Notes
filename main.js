@@ -54,33 +54,15 @@ function clickSaveButton() {
     alert("bitte Überschrift und Notiz eingeben");
     return;
   }
-  const notes = getNotes();
-  const selectedNoteId = localStorage.getItem(SELECTED_ID);
 
-  if (selectedNoteId) {
-    const updatedNotes = notes.map((note) => {
-      if (note.id === parseInt(selectedNoteId)) {
-        return {
-          ...note,
-          title,
-          content,
-          date: new Date().getTime(),
-        };
-      }
-      return note;
-    });
+  let currentId = undefined;
+  const selectedNoteIdEl = document.querySelector(".selected");
 
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedNotes));
-    localStorage.removeItem(SELECTED_ID);
-  } else {
-    notes.push({
-      id: getNextId(),
-      title,
-      content,
-      date: new Date().getTime(),
-    });
-    localStorage.setItem("noteapp-notes", JSON.stringify(notes));
+  if (selectedNoteIdEl) {
+    currentId = selectedNoteIdEl.getAttribute("data-id");
   }
+
+  saveNote(title, content, Number(currentId));
 
   titleInputEl.value = "";
   noteInputEl.value = "";
@@ -107,10 +89,7 @@ function selectNote(id) {
   );
   if (selectedNoteEl.classList.contains("selected")) return;
 
-  const noteEntriesEls = document.querySelectorAll(".saved-notes");
-  noteEntriesEls.forEach((noteEntry) => {
-    noteEntry.classList.remove("selected");
-  });
+  removeSelectedNoteClass();
 
   selectedNoteEl.classList.add("selected");
 }
@@ -118,7 +97,7 @@ function selectNote(id) {
 function newNote() {
   titleInputEl.value = "";
   noteInputEl.value = "";
-
+  removeSelectedNoteClass();
   localStorage.removeItem(SELECTED_ID);
 }
 
@@ -130,4 +109,11 @@ function deleteNote() {
     alert("Willst du die Notiz wirklich löschen?");
     localStorage.removeItem(SELECTED_ID);
   }
+}
+
+function removeSelectedNoteClass() {
+  const noteEntriesEls = document.querySelectorAll(".saved-notes");
+  noteEntriesEls.forEach((noteEntry) => {
+    noteEntry.classList.remove("selected");
+  });
 }
