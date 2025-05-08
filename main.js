@@ -31,9 +31,9 @@ function createNote() {
     sidebar += `
     
           <div data-id="${note.id}" class="saved-notes">
-            <h2 class="title-saved-notes">${note.title}</h2>
+            <h2 class="title-saved-notes">${escapeHtml(note.title)}</h2>
             <p class="content-saved-notes">
-              ${note.content}
+              ${escapeHtml(note.content)}
             </p>
             <span class="date"><em>${new Date(note.date).toLocaleString(
               "de-DE"
