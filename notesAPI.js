@@ -1,5 +1,4 @@
 const LOCAL_STORAGE_KEY = "noteapp-notes";
-const SELECTED_ID = "selectedNoteId";
 
 function saveNote(title, content, id = undefined) {
   const notes = getNotes();

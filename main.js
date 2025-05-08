@@ -82,15 +82,13 @@ function selectNote(id) {
   titleInputEl.value = currentNote.title;
   noteInputEl.value = currentNote.content;
 
-  localStorage.setItem(SELECTED_ID, currentNote.id);
-
   const selectedNoteEl = document.querySelector(
     `.saved-notes[data-id="${id}"]`
   );
+
   if (selectedNoteEl.classList.contains("selected")) return;
 
   removeSelectedNoteClass();
-
   selectedNoteEl.classList.add("selected");
 }
 
@@ -98,17 +96,23 @@ function newNote() {
   titleInputEl.value = "";
   noteInputEl.value = "";
   removeSelectedNoteClass();
-  localStorage.removeItem(SELECTED_ID);
 }
 
 function deleteNote() {
-  //const notes = getNotes();
-  const currentNote = localStorage.getItem(SELECTED_ID);
+  const notes = getNotes();
 
-  if (currentNote) {
-    alert("Willst du die Notiz wirklich löschen?");
-    localStorage.removeItem(SELECTED_ID);
+  const selectedNoteId = document.querySelector(".selected");
+
+  if (!selectedNoteId) {
+    alert("du hast keine Notiz ausgewählt");
   }
+  const selectedNote = Number(selectedNoteId.getAttribute("data-id"));
+  const updateNotes = notes.filter((note) => note.id !== selectedNote);
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updateNotes));
+
+  selectedNoteId.remove();
+  titleInputEl.value = "";
+  noteInputEl.value = "";
 }
 
 function removeSelectedNoteClass() {
