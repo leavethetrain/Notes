@@ -4,10 +4,15 @@ const titleInputEl = document.getElementById("title-input-id");
 const noteInputEl = document.getElementById("note-content-id");
 const addButtonEl = document.getElementById("add-note-id");
 const deleteButtonEl = document.getElementById("delete-button");
+const searchInputEl = document.getElementById("search-input")
+const searchButtonEl = document.querySelector(".search-button");
+
 
 saveButtonEl.addEventListener("click", clickSaveButton);
 addButtonEl.addEventListener("click", newNote);
 deleteButtonEl.addEventListener("click", deleteNote);
+searchButtonEl.addEventListener("click", searchNotes);
+searchInputEl.addEventListener("keydown", searchNotes);
 
 createNote();
 applyListeners();
@@ -22,8 +27,8 @@ function applyListeners() {
   });
 }
 
-function createNote() {
-  const notes = getNotes();
+function createNote(filteredInput = null) {
+  const notes = filteredInput || getNotes();
   const sortedNotes = notes.sort((a, b) => b.date - a.date);
   let sidebar = "";
 
@@ -44,6 +49,7 @@ function createNote() {
   });
 
   notesListEL.innerHTML = sidebar;
+  applyListeners();
 }
 
 function clickSaveButton() {
@@ -120,4 +126,18 @@ function removeSelectedNoteClass() {
   noteEntriesEls.forEach((noteEntry) => {
     noteEntry.classList.remove("selected");
   });
+}
+
+function searchNotes(){
+const notes = getNotes();
+
+const userInput = searchInputEl.value.toLowerCase();
+const filteredInput = notes.filter(note => note.content.toLowerCase().includes(userInput) || 
+note.title.toLowerCase().includes(userInput));
+
+createNote(filteredInput);
+
+
+
+
 }
