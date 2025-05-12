@@ -21,6 +21,7 @@
   height: 100vh;
   width: 100%;
   overflow-y: auto;
+  background-color: rgb(253, 246, 212);
 }
 
 .add-note {
@@ -49,13 +50,12 @@ svg {
 .note-list {
   display: flex;
   flex-wrap: wrap;
-
   gap: 2rem;
   margin: 0.5rem;
 }
 
 .empty {
-  margin-top: 10rem;
+  margin-top: 9rem;
   font-size: 1.5rem;
   color: #9c999c;
   text-shadow: 1px 1px 5px rgba(205, 196, 207, 0.8);
@@ -114,6 +114,16 @@ svg {
   gap: 0.2rem;
 }
 
+.darkmode {
+  border: none;
+  border-radius: 10px;
+}
+
+.darkmode svg {
+  height: 1.5rem;
+  width: 1.3rem;
+}
+
 .delete-all {
   width: 12.2rem;
   border: none;
@@ -163,6 +173,7 @@ svg {
   font-size: 3rem;
   font-weight: 600;
   border: none;
+  border-radius: 8px;
   padding: 1rem;
   width: 70%;
 }
@@ -197,6 +208,8 @@ svg {
   height: 75vh;
   resize: none;
   width: 90%;
+  border-radius: 8px;
+  background-color: rgb(253, 246, 212);
 }
 
 input::placeholder {
@@ -217,7 +230,8 @@ input::placeholder {
 .selected,
 .search-button:hover,
 .quit:hover,
-.delete-all:hover {
+.delete-all:hover,
+.darkmode:hover {
   background-color: var(--primary-color-hover);
   transition: 0.2s ease-in-out;
   color: grey;
@@ -225,4 +239,46 @@ input::placeholder {
 
 .saved-notes:not(.selected) {
   cursor: pointer;
+}
+.empty,
+.add-note,
+.search-div,
+.delete-all,
+span {
+  caret-color: transparent;
+  user-select: none;
+}
+
+input,
+textarea {
+  caret-color: var(--primary-color);
+}
+
+@media only screen and (max-width: 600px) {
+  .title-input {
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 1rem;
+    width: 100%;
+  }
+  .title-button {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .button-div button {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .button-div svg {
+    width: 1.6rem;
+    height: auto;
+  }
 }
