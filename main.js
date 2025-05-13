@@ -10,7 +10,6 @@ const searchButtonEl = document.querySelector(".search-button");
 const sidebarEL = document.querySelector(".sidebar");
 const cancelButtonEl = document.querySelector(".quit");
 const deleteAllButtonEl = document.querySelector(".delete-all");
-const emptyEl = document.querySelector(".empty");
 
 saveButtonEl.addEventListener("click", clickSaveButton);
 addButtonEl.addEventListener("click", newNote);
@@ -22,6 +21,7 @@ deleteAllButtonEl.addEventListener("click", deletAll);
 
 createNote();
 applyListeners();
+updateEmptyNotes();
 
 function applyListeners() {
   const noteEntryEl = document.querySelectorAll(".saved-notes");
@@ -86,7 +86,7 @@ function clickSaveButton() {
 
   createNote();
   applyListeners();
-  emptyEl.remove();
+  updateEmptyNotes();
 }
 
 function selectNote(id) {
@@ -182,9 +182,12 @@ function deletAll() {
 }
 
 function updateEmptyNotes() {
-  const notesAfterDelte = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+  const emptyElement = document.querySelector(".empty");
+  const notes = getNotes();
 
-  if (!notesAfterDelte || notesAfterDelte.length === 0) {
-    document.querySelector(".sidebar").appendChild(emptyEl);
+  if (notes.length === 0) {
+    emptyElement.style.display = "block";
+  } else {
+    emptyElement.style.display = "none";
   }
 }
