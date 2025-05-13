@@ -7,8 +7,8 @@
 }
 
 :root {
-  --primary-color: #f65de7;
-  --primary-color-hover: #f1dcef;
+  --primary-color: #e68d6a;
+  --primary-color-hover: #ecbc9f;
   --primary-color-icontext: #fff;
   --font-family: "Poppins", sans-serif;
 }
@@ -50,8 +50,11 @@ svg {
 .note-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
-  margin: 0.5rem;
+  align-items: center;
+  justify-content: start;
+
+  gap: 1rem;
+  margin: 2rem 0 0 2rem;
 }
 
 .empty {
@@ -68,7 +71,7 @@ svg {
   height: 7rem;
   width: 7rem;
   padding: 1rem;
-  margin: 1.5rem 0;
+  background-color: #fadbad;
   border-radius: 8px;
   box-shadow: 0px 0px 20px 2px rgb(221, 217, 217);
 }
@@ -83,7 +86,7 @@ svg {
 
 .content-saved-notes {
   font-size: 1rem;
-  color: rgb(165, 163, 163);
+  color: rgb(136, 134, 134);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -107,21 +110,24 @@ svg {
 
 .search-div {
   display: flex;
-  width: 15rem;
+  width: 17rem;
   height: 2rem;
   flex-direction: row;
   margin: 1rem 1rem;
-  gap: 0.2rem;
+  gap: 0.6rem;
 }
 
 .darkmode {
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
+  width: 2rem;
+  height: 1.5rem;
+  background-color: var(--primary-color);
 }
 
 .darkmode svg {
-  height: 1.5rem;
-  width: 1.3rem;
+  height: 1.4rem;
+  width: 1.7rem;
 }
 
 .delete-all {
@@ -145,6 +151,8 @@ svg {
   width: 3rem;
   border: none;
   border-radius: 8px;
+  margin-right: 1rem;
+  background-color: var(--primary-color);
 }
 
 .search-button:hover {
@@ -244,7 +252,8 @@ input::placeholder {
 .add-note,
 .search-div,
 .delete-all,
-span {
+span,
+div {
   caret-color: transparent;
   user-select: none;
 }
@@ -254,15 +263,64 @@ textarea {
   caret-color: var(--primary-color);
 }
 
+body.dark-mode .main-content,
+body.dark-mode .title-button,
+body.dark-mode .add-note,
+body.dark-mode .sidebar,
+body.dark-mode .title-input,
+body.dark-mode,
+body.dark-mode .saved-notes {
+  background-color: black;
+}
+
+body.dark-mode .delete-all,
+body.dark-mode .add-note,
+body.dark-mode .search-button,
+body.dark-mode .save,
+body.dark-mode .quit,
+body.dark-mode .delete,
+body.dark-mode .darkmode {
+  background-color: rgb(54, 5, 48);
+  color: rgb(221, 173, 204);
+}
+
+body.dark-mode .search,
+body.dark-mode .note-input {
+  background-color: rgb(117, 92, 114);
+  box-shadow: 0px 0px 11px 7px rgb(51, 25, 43);
+  color: rgb(54, 5, 48);
+}
+
+body.dark-mode .title-input {
+  color: rgb(54, 5, 48);
+  box-shadow: 0px 0px 10px 7px rgb(51, 25, 43);
+}
+
+body.dark-mode .saved-notes {
+  box-shadow: 0px 0px 10px 7px rgb(51, 25, 43);
+  color: rgb(117, 92, 114);
+}
+
+body.dark-mode .saved-notes:hover,
+body.dark-mode .add-note:hover,
+body.dark-mode .delete-all:hover,
+body.dark-mode .darkmode:hover,
+body.dark-mode .save:hover,
+body.dark-mode .quit:hover,
+body.dark-mode .delete:hover {
+  background-color: rgb(117, 92, 114);
+  color: black;
+}
+
 @media only screen and (max-width: 600px) {
   .title-input {
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 600;
-    border: none;
-    border-radius: 8px;
+
     padding: 1rem;
     width: 100%;
   }
+
   .title-button {
     display: flex;
     flex-direction: column-reverse;
@@ -272,13 +330,40 @@ textarea {
     gap: 0.5rem;
   }
 
+  #note-content-id {
+    font-size: 1.2rem;
+  }
+
   .button-div button {
-    width: 2rem;
+    width: 3rem;
     height: 2rem;
   }
 
   .button-div svg {
     width: 1.6rem;
     height: auto;
+  }
+
+  .note-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    gap: 0.8rem;
+  }
+
+  .sidebar {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .delete-all {
+    margin-bottom: 3rem;
+  }
+
+  .add-note {
+    width: 90%;
+    margin: 1rem 2rem;
   }
 }

@@ -10,6 +10,7 @@ const searchButtonEl = document.querySelector(".search-button");
 const sidebarEL = document.querySelector(".sidebar");
 const cancelButtonEl = document.querySelector(".quit");
 const deleteAllButtonEl = document.querySelector(".delete-all");
+const darkModeButtonEl = document.querySelector(".darkmode");
 
 saveButtonEl.addEventListener("click", clickSaveButton);
 addButtonEl.addEventListener("click", newNote);
@@ -18,6 +19,7 @@ searchButtonEl.addEventListener("click", searchNotes);
 searchInputEl.addEventListener("keydown", searchNotes);
 cancelButtonEl.addEventListener("click", cancelButton);
 deleteAllButtonEl.addEventListener("click", deletAll);
+darkModeButtonEl.addEventListener("click", darkMode);
 
 createNote();
 applyListeners();
@@ -190,4 +192,9 @@ function updateEmptyNotes() {
   } else {
     emptyElement.style.display = "none";
   }
+}
+
+function darkMode() {
+  var element = document.body;
+  element.classList.toggle("dark-mode");
 }
