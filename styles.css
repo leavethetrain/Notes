@@ -279,6 +279,10 @@ body.dark-mode .saved-notes {
   background-color: black;
 }
 
+body.dark-mode .saved-notes {
+  border: 2px solid rgb(54, 5, 48);
+}
+
 body.dark-mode .delete-all,
 body.dark-mode .add-note,
 body.dark-mode .search-button,
@@ -325,7 +329,7 @@ body.dark-mode .search-button:hover {
     font-weight: 600;
 
     padding: 1rem;
-    width: 100%;
+    width: 90%;
   }
 
   .title-button {
