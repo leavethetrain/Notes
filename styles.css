@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100..900&display=swap");
 
 * {
   margin: 0;
@@ -7,21 +7,27 @@
 }
 
 :root {
-  --primary-color: #e68d6a;
-  --primary-color-hover: #ecbc9f;
+  --primary-color: #67d8cf;
+  --primary-color-hover: #c8f7f3;
   --primary-color-icontext: #fff;
-  --font-family: "Poppins", sans-serif;
+  --font-family: "Noto Sans Mono", sans-serif;
 }
 
 .sidebar {
   text-align: center;
-  width: auto;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
   overflow-y: auto;
-  background-color: rgb(253, 246, 212);
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 1rem;
+  padding: 1rem;
 }
 
 .add-note {
@@ -34,6 +40,7 @@
   font-size: 1rem;
   border-radius: 8px;
   border: none;
+  padding: 1rem;
   background-color: var(--primary-color);
   color: var(--primary-color-icontext);
 }
@@ -52,8 +59,8 @@ svg {
   flex-wrap: wrap;
   align-items: center;
   justify-content: start;
+  width: 100%;
 
-  gap: 1rem;
   margin: 2rem 0 0 2rem;
 }
 
@@ -67,16 +74,18 @@ svg {
 .saved-notes {
   display: flex;
   flex-direction: column;
+  border: 2px solid var(--primary-color);
   justify-content: space-between;
-  height: 7rem;
-  width: 7rem;
+  height: 5rem;
+  width: 92%;
   padding: 1rem;
-  background-color: #fadbad;
+
   border-radius: 8px;
   box-shadow: 0px 0px 20px 2px rgb(221, 217, 217);
 }
 
 .title-saved-notes {
+  text-align: start;
   font-size: 1.5rem;
   margin: 0;
   white-space: nowrap;
@@ -85,6 +94,7 @@ svg {
 }
 
 .content-saved-notes {
+  text-align: start;
   font-size: 1rem;
   color: rgb(136, 134, 134);
   white-space: nowrap;
@@ -141,22 +151,17 @@ svg {
   color: var(--primary-color-icontext);
 }
 
-.search-button img {
+.search-button svg {
   height: 1.2rem;
-  width: auto;
-  padding: 0.5rem;
+  width: 1.2rem;
 }
 
 .search-button {
-  width: 3rem;
+  width: 4rem;
   border: none;
   border-radius: 8px;
   margin-right: 1rem;
   background-color: var(--primary-color);
-}
-
-.search-button:hover {
-  cursor: pointer;
 }
 
 /*==========mainContent======*/
@@ -217,7 +222,7 @@ svg {
   resize: none;
   width: 90%;
   border-radius: 8px;
-  background-color: rgb(253, 246, 212);
+  background-color: var(--primary-color-hover);
 }
 
 input::placeholder {
@@ -243,6 +248,7 @@ input::placeholder {
   background-color: var(--primary-color-hover);
   transition: 0.2s ease-in-out;
   color: grey;
+  cursor: pointer;
 }
 
 .saved-notes:not(.selected) {
@@ -307,12 +313,13 @@ body.dark-mode .delete-all:hover,
 body.dark-mode .darkmode:hover,
 body.dark-mode .save:hover,
 body.dark-mode .quit:hover,
-body.dark-mode .delete:hover {
+body.dark-mode .delete:hover,
+body.dark-mode .search-button:hover {
   background-color: rgb(117, 92, 114);
   color: black;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
   .title-input {
     font-size: 1.5rem;
     font-weight: 600;
@@ -327,7 +334,6 @@ body.dark-mode .delete:hover {
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    gap: 0.5rem;
   }
 
   #note-content-id {
@@ -349,7 +355,7 @@ body.dark-mode .delete:hover {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    margin: 0;
+    margin: 0 1rem;
     gap: 0.8rem;
   }
 
@@ -364,5 +370,11 @@ body.dark-mode .delete:hover {
   .add-note {
     width: 90%;
     margin: 1rem 2rem;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
   }
 }
