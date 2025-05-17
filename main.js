@@ -11,6 +11,9 @@ const sidebarEL = document.querySelector(".sidebar");
 const cancelButtonEl = document.querySelector(".quit");
 const deleteAllButtonEl = document.querySelector(".delete-all");
 const darkModeButtonEl = document.querySelector(".darkmode");
+const confirmbuttonEL = document.getElementById("yes");
+const cancelButtonElMessagebox = document.getElementById("no");
+const messageBoxEl = document.querySelector(".messagebox");
 
 saveButtonEl.addEventListener("click", clickSaveButton);
 addButtonEl.addEventListener("click", newNote);
@@ -18,8 +21,10 @@ deleteButtonEl.addEventListener("click", deleteNote);
 searchButtonEl.addEventListener("click", searchNotes);
 searchInputEl.addEventListener("keydown", searchNotes);
 cancelButtonEl.addEventListener("click", cancelButton);
-deleteAllButtonEl.addEventListener("click", deletAll);
+deleteAllButtonEl.addEventListener("click", showMessageBox);
 darkModeButtonEl.addEventListener("click", darkMode);
+confirmbuttonEL.addEventListener("click", confirmDelete);
+cancelButtonElMessagebox.addEventListener("click", confirmCancel);
 
 createNote();
 applyListeners();
@@ -197,4 +202,22 @@ function updateEmptyNotes() {
 function darkMode() {
   var element = document.body;
   element.classList.toggle("dark-mode");
+}
+
+function showMessageBox() {
+  const notes = getNotes();
+  if (notes.length === 0) {
+    alert("Es gibt keine Notizen");
+    return;
+  }
+  messageBoxEl.style.visibility = "visible";
+}
+
+function confirmDelete() {
+  deletAll();
+  confirmCancel();
+}
+
+function confirmCancel() {
+  messageBoxEl.style.visibility = "hidden";
 }
