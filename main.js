@@ -202,6 +202,9 @@ function updateEmptyNotes() {
 function darkMode() {
   var element = document.body;
   element.classList.toggle("dark-mode");
+
+  confirmbuttonEL.style.color = "#000";
+  cancelButtonElMessagebox.style.color = "#000";
 }
 
 function showMessageBox() {
