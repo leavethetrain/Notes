@@ -60,7 +60,6 @@ svg {
   align-items: center;
   justify-content: start;
   width: 100%;
-
   margin: 2rem 0 0 2rem;
 }
 
@@ -282,7 +281,7 @@ textarea {
 }
 
 .dark-mode .saved-notes {
-  border: 2px solid rgb(54, 5, 48);
+  border: none;
 }
 
 .dark-mode .delete-all,
@@ -295,6 +294,10 @@ textarea {
 .dark-mode .confirm,
 .dark-mode .confirm2 {
   background-color: rgb(54, 5, 48);
+  color: rgb(221, 173, 204);
+}
+
+.dark-mode svg {
   color: rgb(221, 173, 204);
 }
 
