@@ -204,14 +204,13 @@ function updateEmptyNotes() {
     emptyElement.style.display = "none";
   }
 }
-//===============MessageboxAllNotes===========
+
 function darkMode() {
   var element = document.body;
   element.classList.toggle("dark-mode");
-
-  confirmbuttonEL.style.color = "#000";
-  cancelButtonElMessagebox.style.color = "#000";
 }
+
+//===============MessageboxAllNotes===========
 
 function showMessageBox() {
   const sound = document.getElementById("delete-sound");
@@ -234,14 +233,6 @@ function confirmCancel() {
 }
 
 //===============MessageboxSingleNote===========
-
-function darkMode() {
-  var element = document.body;
-  element.classList.toggle("dark-mode");
-
-  confirmbuttonEL2.style.color = "#000";
-  cancelButtonElMessagebox2.style.color = "#000";
-}
 
 function showMessageBox2() {
   const sound = document.getElementById("delete-sound");
