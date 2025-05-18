@@ -14,10 +14,13 @@ const darkModeButtonEl = document.querySelector(".darkmode");
 const confirmbuttonEL = document.getElementById("yes");
 const cancelButtonElMessagebox = document.getElementById("no");
 const messageBoxEl = document.querySelector(".messagebox");
+const confirmbuttonEL2 = document.getElementById("yes2");
+const cancelButtonElMessagebox2 = document.getElementById("no2");
+const messageBoxEl2 = document.querySelector(".messagebox2");
 
 saveButtonEl.addEventListener("click", clickSaveButton);
 addButtonEl.addEventListener("click", newNote);
-deleteButtonEl.addEventListener("click", deleteNote);
+deleteButtonEl.addEventListener("click", showMessageBox2);
 searchButtonEl.addEventListener("click", searchNotes);
 searchInputEl.addEventListener("keydown", searchNotes);
 cancelButtonEl.addEventListener("click", cancelButton);
@@ -25,6 +28,8 @@ deleteAllButtonEl.addEventListener("click", showMessageBox);
 darkModeButtonEl.addEventListener("click", darkMode);
 confirmbuttonEL.addEventListener("click", confirmDelete);
 cancelButtonElMessagebox.addEventListener("click", confirmCancel);
+confirmbuttonEL2.addEventListener("click", confirmDelete2);
+cancelButtonElMessagebox2.addEventListener("click", confirmCancel2);
 
 createNote();
 applyListeners();
@@ -71,13 +76,14 @@ function clickSaveButton() {
   const title = titleInputEl.value;
   const content = noteInputEl.value;
 
-  titleAndInputEl.style.display = "none";
-  sidebarEL.style.display = "flex";
-
   if (!title || !content) {
     alert("bitte Überschrift und Notiz eingeben");
+
     return;
   }
+
+  titleAndInputEl.style.display = "none";
+  sidebarEL.style.display = "flex";
 
   let currentId = undefined;
   const selectedNoteIdEl = document.querySelector(".selected");
@@ -190,15 +196,15 @@ function deletAll() {
 
 function updateEmptyNotes() {
   const emptyElement = document.querySelector(".empty");
-  const notes = getNotes();
 
+  const notes = getNotes();
   if (notes.length === 0) {
     emptyElement.style.display = "block";
   } else {
     emptyElement.style.display = "none";
   }
 }
-
+//===============MessageboxAllNotes===========
 function darkMode() {
   var element = document.body;
   element.classList.toggle("dark-mode");
@@ -208,6 +214,8 @@ function darkMode() {
 }
 
 function showMessageBox() {
+  const sound = document.getElementById("delete-sound");
+  sound.play();
   const notes = getNotes();
   if (notes.length === 0) {
     alert("Es gibt keine Notizen");
@@ -223,4 +231,34 @@ function confirmDelete() {
 
 function confirmCancel() {
   messageBoxEl.style.visibility = "hidden";
+}
+
+//===============MessageboxSingleNote===========
+
+function darkMode() {
+  var element = document.body;
+  element.classList.toggle("dark-mode");
+
+  confirmbuttonEL2.style.color = "#000";
+  cancelButtonElMessagebox2.style.color = "#000";
+}
+
+function showMessageBox2() {
+  const sound = document.getElementById("delete-sound");
+  sound.play();
+  const notes = getNotes();
+  if (notes.length === 0) {
+    alert("Es gibt keine Notizen");
+    return;
+  }
+  messageBoxEl2.style.visibility = "visible";
+}
+
+function confirmDelete2() {
+  deleteNote();
+  confirmCancel2();
+}
+
+function confirmCancel2() {
+  messageBoxEl2.style.visibility = "hidden";
 }
