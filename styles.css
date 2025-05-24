@@ -381,12 +381,12 @@ body.dark-mode .title-input {
   margin-bottom: 1rem;
 }
 
-#yes:hover,
-#yes2:hover {
-  background-color: rgb(118, 199, 118);
-}
 #no:hover,
 #no2:hover {
+  background-color: rgb(118, 199, 118);
+}
+#yes:hover,
+#yes2:hover {
   background-color: rgb(221, 108, 108);
 }
 
